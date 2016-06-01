@@ -1,0 +1,164 @@
+/* @media( min-width: 768px ) */
+/* @media( min-width: 990px ) */
+
+
+@media( min-width: 768px )
+{
+	/* INDICE */
+	/* Index Perfil   */
+
+	/* INDEX PERFIL */
+
+	.perfil-avatar
+	{
+		border-radius: 50%;
+		height: 150px;
+		left: 50%;
+		margin-left: -75px;
+		position: absolute;
+		top: 100px;
+		width: 150px;
+		z-index: 1;
+
+		-webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 1);
+		-moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 1);
+		box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 1);
+	}
+
+	.perfil-avatar img
+	{
+		border-radius: 50%;
+		height: 150px;
+		width: 150px;
+	}
+
+	.perfil-label
+	{
+		background-color: rgba(0, 0, 0, 0.7);
+		border-radius: 4px;
+		color: white;
+		font-family: Index;
+		left: 50%;
+		margin-left: -250px;
+		padding: 20px;
+		position: absolute;
+		text-align: center;
+		top: 300px;
+		width: 500px;
+		z-index: 1;
+	}
+
+	.perfil-title
+	{
+		font-size: 50px;
+	}
+
+	.perfil-subtitle
+	{
+		font-size: 20px;
+	}
+
+	.perfil-button,
+	.perfil-button:hover,
+	.perfil-button:active,
+	.perfil-button:visited
+	{
+		border: 1px solid white;
+		border-radius: 4px;
+		color: white;
+		display: inline-block;
+		font-size: 40px;
+		margin-top: 20px;
+		padding: 6px 70px 6px 70px;
+		text-decoration: none;
+
+	}
+
+	.perfil-button:hover
+	{
+		background-color: white;
+		color: black;
+	}
+}
+
+@media( min-width: 990px ) 
+{
+   /* INDICE */
+   /* Index Carousel */
+   /* Index Perfil   */
+
+   /* INDEX CAROUSEL */
+
+	html,
+	body,
+	.carousel,
+	.item,
+	.carousel-inner,
+	.active
+	{
+		height: 100%;
+	}
+
+	.fill 
+	{
+		width: 100%;
+		height: 100%;
+		background-position: center;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		background-size: cover;
+		-o-background-size: cover;
+	}
+
+	.bg1 
+	{
+		background-image: url(/img/carousel-1.jpg);
+	}
+
+	.bg2
+	{
+		background-image: url(/img/carousel-2.jpg);
+	}
+
+	.bg3
+	{
+		background-image: url(/img/carousel-3.jpg);
+	}
+
+	.bg4
+	{
+		background-image: url(/img/carousel-4.jpg);
+	}
+
+	.bg5
+	{
+		background-image: url(/img/carousel-5.jpg);
+	}
+
+	.bg6
+	{
+		background-image: url(/img/carousel-6.jpg);
+	}
+
+	.bg7
+	{
+		background-image: url(/img/carousel-7.jpg);
+	}
+
+	.bg8
+	{
+		background-image: url(/img/carousel-8.jpg);
+	}
+
+	.bg9
+	{
+		background-image: url(/img/carousel-9.jpg);
+	}
+
+	.bg10
+	{
+		background-image: url(/img/carousel-10.jpg);
+	}
+
+	
+}
