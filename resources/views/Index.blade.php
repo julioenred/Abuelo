@@ -102,7 +102,7 @@
             <div class="perfil-label">
                 <p class='perfil-title'>Norberto Sevilla</p>
                 <p class='perfil-subtitle'>Pintor Extremeño</p> 
-                <a class='perfil-button' href="#" title="">Entrar</a>
+                <a class='perfil-button' href="/norbertosevilla" title="">Entrar</a>
             </div>
             
         </div>

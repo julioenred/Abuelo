@@ -6,6 +6,7 @@
 {
 	/* INDICE */
 	/* Index Perfil   */
+	/* Album */
 
 	/* INDEX PERFIL */
 
@@ -78,6 +79,24 @@
 	{
 		background-color: white;
 		color: black;
+	}
+
+	/* ALBUM */
+
+	.album
+	{
+		left: 50%;
+		margin-left: -300px;
+		position: absolute;
+		top: 300px;
+		width: 600px;
+	}
+
+	.album img
+	{
+		border-radius: 4px;
+		margin-bottom: 2px;
+		width: 270px;
 	}
 }
 

@@ -1,11 +1,17 @@
 /* INDICE */
 
 /* Index Perfil   */
+/* Menu           */
+/* Album          */
 
-@font-face 
-{
+@font-face {
     font-family: Index;
     src: url(/fonts/abuelo-index.ttf);
+}
+
+body
+{
+	font-family: Index;
 }
 
 .bg
@@ -24,7 +30,7 @@
 	left: 50%;
 	margin-left: -75px;
 	position: absolute;
-	top: 15px;
+	top: 60px;
 	width: 150px;
 	z-index: 1;
 
@@ -45,7 +51,6 @@
 	background-color: rgba(0, 0, 0, 0.7);
 	border-radius: 4px;
 	color: white;
-	font-family: Index;
 	left: 50%;
 	margin-left: -150px;
 	padding: 20px;
@@ -86,4 +91,106 @@
 {
 	background-color: white;
 	color: black;
+}
+
+/* MENU */
+
+.menu,
+.menu-hidden
+{
+	padding-left: 10px;
+}
+
+.menu li
+{
+	display: inline;
+	list-style: none;
+
+}
+
+.menu li a
+{
+	color: black;
+	font-size: 25px;
+
+}
+
+.bars
+{
+	border: 1px solid black;
+	border-radius: 4px;
+	font-size: 20px;
+	margin-right: 20px;
+	padding: 5px 10px 3px 10px;
+	text-align: center;
+	
+}
+
+.menu-hidden
+{
+	background-color: rgba(0, 0, 0, 0.7);
+	border-radius: 4px;
+	color: white;
+	display: none;
+	font-size: 20px;
+	left: 10px;
+	padding-left: 10px;
+	position: absolute;
+	top: 40px;
+	width: 200px;
+	z-index: 2;
+}
+
+.menu-hidden li
+{
+	list-style: none;
+}
+
+/* ALBUM */
+
+.album
+{
+	left: 50%;
+	margin-left: -150px;
+	position: absolute;
+	top: 250px;
+	width: 300px;
+}
+
+.album li
+{
+	display: inline;
+	list-style: none;
+}
+
+.album img
+{
+	border-radius: 4px;
+	margin-bottom: 2px;
+	width: 135px;
+}
+
+.album-sheet
+{
+	background-color: #E6E6E6;
+	border-radius: 4px;
+	display: inline-block;
+	padding: 10px;
+	text-align: center;
+}
+
+.album-sheet-title
+{
+	margin-bottom: 10px;
+}
+
+.album-sheet-title span
+{
+	color: black;
+	margin-right: 10px;
+}
+
+.pictures
+{
+	display: inline-block;
 }
