@@ -18,3 +18,7 @@ Route::get('/', function () {
 Route::get('norbertosevilla', function () {
     return view('NorbertoSevilla');
 });
+
+Route::get('sobrenorberto', function () {
+    return view('Biografia');
+});

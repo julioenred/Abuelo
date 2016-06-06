@@ -259,10 +259,10 @@
 	{
 		width: 22%;
 		position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
-    float: left;
+	    min-height: 1px;
+	    padding-right: 15px;
+	    padding-left: 15px;
+	    float: left;
 	}
 
 	.bio p
@@ -273,7 +273,7 @@
 		font-size: 20px;
 		margin: 20px 0 0 5px;
 		padding: 10px;
-		text-align: justify;
+		text-align: center;
 	}
 
 	.inside

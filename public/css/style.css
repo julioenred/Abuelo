@@ -31,6 +31,13 @@ body
 	font-size: 20px;
 	margin: 200px 0 0 5px;
 	padding: 10px;
+	text-align: center;
+}
+
+.inside p
+{
+	font-size: 20px;
+	padding: 10px;
 	text-align: justify;
 }
 
@@ -126,6 +133,11 @@ body
 
 }
 
+.menu-hidden li a
+{
+	color: white;
+}
+
 .bars
 {
 	border: 1px solid black;
@@ -166,7 +178,7 @@ body
 	left: 50%;
 	margin-left: -150px;
 	position: absolute;
-	top: 480px;
+	top: 350px;
 	width: 300px;
 }
 

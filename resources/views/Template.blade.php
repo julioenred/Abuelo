@@ -27,8 +27,9 @@
                 <li class='hidden-xs hidden-sm'><a href="/contacto" title="">Contacto</a></li>
             </menu>
             <menu class='menu-hidden' type="context toolbar">
-                <li>Sobre Norberto</li>
-                <li>Contacto</li>
+                <li><a href="/norbertosevilla" title="">Inicio</a></li>
+                <li><a href="/sobrenorberto" title="">Sobre Norberto</a></li>
+                <li><a href="/contacto" title="">Contacto</a></li>
             </menu>
             <div class="main">
 
@@ -36,7 +37,7 @@
                     <div class="perfil-avatar">
                         <img src="/img/perfil.jpg" class='img-responsive' alt="">
                     </div>    
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                    <p>Pintor Extremeño <br> 1926 - 2015</p>
                 </div>
                 
 
