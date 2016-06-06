@@ -23,6 +23,17 @@ body
 
 /* INDEX PERFIL */
 
+.bio p
+{
+	background-color: rgba(0, 0, 0, 0.7);
+	border-radius: 4px;
+	color: white;
+	font-size: 20px;
+	margin: 200px 0 0 5px;
+	padding: 10px;
+	text-align: justify;
+}
+
 .perfil-avatar
 {
 	border-radius: 50%;
@@ -146,6 +157,8 @@ body
 	list-style: none;
 }
 
+
+
 /* ALBUM */
 
 .album
@@ -153,7 +166,7 @@ body
 	left: 50%;
 	margin-left: -150px;
 	position: absolute;
-	top: 250px;
+	top: 480px;
 	width: 300px;
 }
 
@@ -175,6 +188,7 @@ body
 	background-color: #E6E6E6;
 	border-radius: 4px;
 	display: inline-block;
+	margin-bottom: 20px;
 	padding: 10px;
 	text-align: center;
 }

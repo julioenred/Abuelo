@@ -4,9 +4,10 @@
 
 @media( min-width: 768px )
 {
-	/* INDICE */
+	/* INDICE         */
 	/* Index Perfil   */
-	/* Album */
+	/* Menu           */
+	/* Album          */
 
 	/* INDEX PERFIL */
 
@@ -102,18 +103,32 @@
 
 @media( min-width: 990px ) 
 {
-   /* INDICE */
+   /* INDICE         */
    /* Index Carousel */
-   /* Index Perfil   */
+   /* Menu           */
+
+    .container
+	{
+		
+		border-top: 10px solid #E6E6E6;
+		height: 100%;
+		padding: 0;
+	}
 
    /* INDEX CAROUSEL */
 
 	html,
 	body,
-	.carousel,
+	
 	.item,
-	.carousel-inner,
 	.active
+	{
+		background-color: #E6E6E6;
+		height: 100%;
+	}
+
+	.carousel-inner,
+	.carousel
 	{
 		height: 100%;
 	}
@@ -177,6 +192,142 @@
 	.bg10
 	{
 		background-image: url(/img/carousel-10.jpg);
+	}
+
+	/* MENU */
+
+	.menu
+	{
+		background-color: #E6E6E6;
+		margin: 0;
+		padding-left: 0;
+	}
+
+	.menu li
+	{
+		margin-right: 100px;
+	}
+
+	.menu li a
+	{
+		font-size: 40px;
+	}
+
+	.menu-norbertosevilla a
+	{
+		background-color: white;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+		padding: 10px 30px 10px 20px;
+
+	}
+
+	/* MAIN */
+
+	.main
+	{
+		background-color: white;
+		border-top-right-radius: 10px;
+		border-bottom-left-radius: 10px;
+		border-bottom-right-radius: 10px;
+		height: 500px;
+		margin-bottom: 20px;
+		width: 100%;
+	}
+
+	.main .perfil-avatar
+	{
+		border-radius: 50%;
+		display: inline-block;
+		height: 150px;
+		margin-left: 30px;
+		position: initial;
+		width: 150px;
+		
+		-webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 1);
+		-moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 1);
+		box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 1);
+	}
+
+	.bio,
+	.inside
+	{
+		display: inline-block;
+	}
+
+	.bio
+	{
+		width: 22%;
+		position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+	}
+
+	.bio p
+	{
+		background-color: rgba(0, 0, 0, 0.7);
+		border-radius: 4px;
+		color: white;
+		font-size: 20px;
+		margin: 20px 0 0 5px;
+		padding: 10px;
+		text-align: justify;
+	}
+
+	.inside
+	{
+		height: 450px;
+		padding-top: 40px;
+		width: 75%;
+
+	}
+
+	
+	#inside .fill,
+	#inside .item,
+	#inisde .carousel-inner,
+	#inside .active,
+	#inside .carousel,
+	#inside .slide
+	{
+		background-color: white !important;
+		border-radius: 10px;
+	}
+
+	/* ALBUM */
+
+	.album
+	{
+		border-radius: 4px;
+		left: 0;
+		margin: 0 0 20px 0;
+		position: initial;
+		width: 100%;
+	}
+
+	.album img
+	{
+		border-radius: 4px;
+		margin-bottom: 2px;
+		width: 220px;
+	}
+
+	.album-sheet
+	{
+		background-color: white;
+		border-radius: 10px;
+		display: inline-block;
+		margin-bottom: 20px;
+		padding: 10px 0 35px 0;
+		text-align: center;
+		width: 100%;
+	}
+
+	.album-sheet-title
+	{
+		font-size: 25px;
 	}
 
 	

@@ -17,35 +17,49 @@
     </head>
     <body>
 
-        <menu class='menu' type="context toolbar">
-            <i class="fa fa-bars hidden-md hidden-lg bars" aria-hidden="true"></i>
-            <li><a href="/norbertosevilla" title="">Norberto Sevilla</a></li>
-        </menu>
-        <menu class='menu-hidden' type="context toolbar">
-            <li>Sobre Norberto</li>
-            <li>Contacto</li>
-        </menu>
-        <div class="text-center">
-            <div class="perfil-avatar">
-                <img src="/img/perfil.jpg" class='img-responsive' alt="">
-            </div>    
+        <div class="container">
+            
+            <menu class='menu' type="context toolbar">
+                <i class="fa fa-bars hidden-md hidden-lg bars" aria-hidden="true"></i>
+                <li class='menu-norbertosevilla'><a href="/norbertosevilla" title="">Norberto Sevilla</a></li>
+                {{-- <li><a href="/blog" title="">Blog</a></li> --}}
+                <li class='hidden-xs hidden-sm'><a href="/sobrenorberto" title="">Sobre Norberto</a></li>
+                <li class='hidden-xs hidden-sm'><a href="/contacto" title="">Contacto</a></li>
+            </menu>
+            <menu class='menu-hidden' type="context toolbar">
+                <li>Sobre Norberto</li>
+                <li>Contacto</li>
+            </menu>
+            <div class="main">
+
+                <div class="bio">
+                    <div class="perfil-avatar">
+                        <img src="/img/perfil.jpg" class='img-responsive' alt="">
+                    </div>    
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                </div>
+                
+
+                {{-- INSIDE --}}
+
+                @section('inside')
+
+                    
+
+                @show
+            </div>
+
+            
+
+            {{-- SIDEBAR --}}
+
+            @section('sidebar')
+
+                
+
+            @show
+
         </div>
-
-        {{-- MAIN --}}
-
-        @section('main')
-
-            
-
-        @show
-
-        {{-- SIDEBAR --}}
-
-        @section('sidebar')
-
-            
-
-        @show
 
         {{-- JS --}}
 
