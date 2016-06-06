@@ -91,7 +91,7 @@
                 <span>HERVÁS</span><span>·</span><a href="#" title="">Ver Todos</a>
             </div>
             <div class="pictures">
-                <li><img src="/img/carousel-1.jpg" alt=""></li>
+                <li><img src="/img/carousel-1.jpg" alt="" data-toggle="modal" data-target="#modal"></li>
                 <li><img src="/img/carousel-2.jpg" alt=""></li>
                 <li><img src="/img/carousel-1.jpg" alt=""></li>
                 <li><img src="/img/carousel-2.jpg" alt=""></li>
@@ -111,6 +111,35 @@
         </div>
     </div>
 @endsection
+
+@section('modals')
+  <!-- Large modal -->
+
+  <div id='modal' class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-img">
+          <img class='img-responsive' src="/img/carousel-2.jpg" alt="">
+        </div>
+        
+        <div class="modal-text">
+            <div class="modal-title">
+              TITULO
+            </div>
+            <div class="modal-description">
+              Unas lineas para describir el cuadro
+            </div>
+        </div>
+        
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+@stop
 
 {{-- JS --}}
 

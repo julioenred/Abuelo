@@ -62,6 +62,12 @@
 
         </div>
 
+        {{-- MODALS --}}
+
+        @section('modals')
+        
+        @show
+
         {{-- JS --}}
 
         @section('js')

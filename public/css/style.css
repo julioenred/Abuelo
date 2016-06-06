@@ -220,3 +220,17 @@ body
 {
 	display: inline-block;
 }
+
+/* MODALS */
+
+.modal-img
+{
+	padding: 5px;
+	text-align: center;
+}
+
+.modal-text
+{
+	padding: 5px;
+	text-align: center;
+}

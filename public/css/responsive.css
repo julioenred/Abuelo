@@ -330,5 +330,44 @@
 		font-size: 25px;
 	}
 
+	/* 	MODALS */
+
+	#modal img
+	{
+		border-radius: 4px;
+		display: inline-block;
+		margin: 20px;
+		width: 800px;
+	}
+
+	.modal-img
+	{
+		padding: 5px;
+		text-align: center;
+	}
+
+	.modal-text
+	{
+		padding: 5px;
+		text-align: center;
+	}
+
+	.modal-title,
+	.modal-description
+	{
+		
+		
+	}
+
+	.modal-title
+	{
+		font-size: 30px;
+	}
+
+	.modal-description
+	{
+		font-size: 20px;
+	}
+
 	
 }
