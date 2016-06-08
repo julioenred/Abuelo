@@ -234,3 +234,69 @@ body
 	padding: 5px;
 	text-align: center;
 }
+
+/* ADMIN */
+
+
+.menu-admin li
+{
+	font-size: 30px;
+	list-style: none;
+	margin-bottom: 5px;
+	width: 100%;
+}
+
+.menu-admin a,
+.menu-admin a:hover,
+.menu-admin a:visited,
+.menu-admin a:active
+{
+	color: white;
+	text-decoration: none;
+}
+
+.menu-admin li i
+{
+	font-size: 20px;
+}
+
+.fotos img
+{
+	border-radius: 4px;
+	margin-bottom: 6px;
+	width: 200px;
+}
+
+.fotos li
+{
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 4px;
+	display: inline-block;
+	font-size: 20px;
+	list-style: none;
+	margin-bottom: 5px;
+	padding: 10px;
+}
+
+.fotos li a
+{
+	float: right;
+	font-size: 20px;
+	width: 60px;
+}
+
+.album-admin
+{
+	background-color: #337ab7;
+	border-radius: 4px;
+	padding: 20px;
+	text-align: center;
+	width: 800px;
+}
+
+.album-admin p
+{
+	color: white;
+	font-size: 40px;
+}

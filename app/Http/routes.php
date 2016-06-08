@@ -22,3 +22,23 @@ Route::get('norbertosevilla', function () {
 Route::get('sobrenorberto', function () {
     return view('Biografia');
 });
+
+Route::get('jcrop', function () {
+    return view('Jcrop');
+});
+
+Route::any('crop', function () {
+
+});
+
+Route::any('fotos', function () {
+    return view('FotosAdmin');
+});
+
+Route::any('albumes', function () {
+    return view('AlbumesAdmin');
+});
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
