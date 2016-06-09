@@ -5,10 +5,11 @@ use DB;
 use Input;
 
 use App\Albums;
+use App\Pictures;
 
 
 use App\Http\Requests;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 
 class HomeController extends Controller
 {
@@ -281,45 +282,63 @@ class HomeController extends Controller
           }
     }
 
-    public function uploadImage()
+    public function UploadPicture()
     {
         
-        $Album = Input::get('Album');
+        $Title       = Request::input( 'Title' );
+        $Description = Request::input( 'Description' );
+        $Album       = Request::input( 'Album' );
+        $File        = Request::file( 'File' );
+
+        if ( $File == null ) 
+        {
+            return 'tienes que seleccionar una foto';
+        }
+
         $Directory = 'public/img/' . $Album . '/';
         $Path = base_path( $Directory );
-        $File = Input::file('File');
+        $File = Request::file( 'File' );
+        //dd($File);
         $Mime = explode("/", $File->getMimeType() );
+        //dd($Mime);
 
         if ( $Mime[1] != 'jpg' and $Mime[1] != 'JPG' and $Mime[1] != 'jpeg' and $Mime[1] != 'JPEG' and $Mime[1] != 'png' and $Mime[1] != 'PNG' and $Mime[1] != 'gif' and $Mime[1] != 'GIF' ) 
         {
-            if ( ! file_exists ( $Path ) ) 
-            {
-                 
-                  mkdir( $Path );
-                  
-            }
-            else
-            {
-                  if ( ! is_dir( $Path ) ) 
-                  {
-                        mkdir( $Path );
-                  }
-            }
-
-            $Img = time() . '-' . $File->getClientOriginalName();
-            $File->move($Path, $Img);
-
-            Pictures::create([
-                                'Title'       => nput::get('Title'),
-                                'Description' => $nput::get('Description'),
-                                'Url'         => '/img/' . $Album . $Img,
-                            ]);
-
+            
+            echo 'el archivo debe ser una foto';
         }
         else
         {
-            echo 'el archivo debe ser una foto';
-        }
+            
+
+            if ( ! file_exists ( $Path ) ) 
+                {
+                     
+                      mkdir( $Path );
+                      
+                }
+                else
+                {
+                      if ( ! is_dir( $Path ) ) 
+                      {
+                            mkdir( $Path );
+                      }
+                }
+
+                $Img = time() . '-' . $File->getClientOriginalName();
+                $File->move($Path, $Img);
+
+                Pictures::create([
+                                    'Title'       => $Title,
+                                    'Description' => $Description,
+                                    'Url'         => '/img/' . $Album . $Img,
+                                    'Id_Album'    => $Album,
+                                 ]);
+
+                echo 'foto subida';
+            }
+
+        
         
     }
 

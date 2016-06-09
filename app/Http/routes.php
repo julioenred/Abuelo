@@ -35,6 +35,8 @@ Route::any('crop', function () {
 
 Route::any('/pictures', 'HomeController@ViewPicturesAdmin');
 
+Route::any('/uploadpicture', 'HomeController@UploadPicture');
+
 Route::any('/albums', 'HomeController@ViewAlbumsAdmin');
 
 Route::any('/createalbum', 'HomeController@CreateAlbum');

@@ -59,7 +59,7 @@
                   </div>
                   <div class="modal-body">
                         
-                    {{ Form::open(array('url' => '/subirfoto', 'files' => true)) }} 
+                    {{ Form::open(array('url' => '/uploadpicture', 'files' => true)) }} 
                         <h4>Elige un título para la foto (opcional)</h4>
                         <input class='form-control' type="text" name="Title" value="" placeholder="Ej: Fuente chiquita">
 

@@ -8,7 +8,7 @@ class Pictures extends Model
 {
     protected $table = 'Pictures';
     protected $fillable = [
-        'Title', 'Description', 'Url',
+        'Title', 'Description', 'Url', 'Id_Album',
     ];
 
     public function Albums()
