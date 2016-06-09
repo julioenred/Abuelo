@@ -20,8 +20,8 @@
         <div class="container">
             
             <div class="menu-admin col-xs-2">
-                <li class='btn btn-primary'><a href="/fotos" title=""><i class="fa fa-photo" aria-hidden="true"></i> Fotos</a></li>
-                <li class='btn btn-primary'><a href="/albumes" title=""><i class="fa fa-folder-open-o" aria-hidden="true"></i> Albumes</a></li>
+                <li class='btn btn-primary'><a href="/pictures" title=""><i class="fa fa-photo" aria-hidden="true"></i> Fotos</a></li>
+                <li class='btn btn-primary'><a href="/albums" title=""><i class="fa fa-folder-open-o" aria-hidden="true"></i> Albumes</a></li>
                 <li class='btn btn-danger'><i class="fa fa-power-off" aria-hidden="true"></i> Salir</li><br><br>
                 <li class='btn btn-success' data-toggle="modal" data-target="#subirfoto"><i class="fa fa-upload" aria-hidden="true"></i> Subir Foto</li>
                 <li class='btn btn-success' data-toggle="modal" data-target="#crearalbum"><i class="fa fa-folder" aria-hidden="true"></i> Crear Album</li>
@@ -60,9 +60,23 @@
                   <div class="modal-body">
                         
                     {{ Form::open(array('url' => '/subirfoto', 'files' => true)) }} 
+                        <h4>Elige un título para la foto (opcional)</h4>
+                        <input class='form-control' type="text" name="Title" value="" placeholder="Ej: Fuente chiquita">
+
+                        <h4>Redacta un texto que describa la foto (opcional)</h4>
+                        <textarea class='form-control' name="Description"></textarea>
+
+                        <h3>Es posible que quieras añadir la foto a un album. Si no existe el album todavía, créalo antes de subir la foto.</h3>
+                        <h4>Elige un album</h4>
+
+                        <select class="form-control" name='Album'>
+                            @foreach ($Albums as $element)
+                                <option value='{{ $element->id }}'>{{ $element->Name }}</option>
+                            @endforeach
+                        </select> 
 
                         <h4 class='mtop20'>Selecciona una imagen</h4>
-                        {{ Form::file('file', array("class" => "") )}}
+                        {{ Form::file('File', array("class" => "") )}}
                         <br>
 
                         <input type="submit" class='btn btn-primary mtop20' value="Subir Foto">
@@ -80,14 +94,14 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Subir Foto</h4>
+                    <h4 class="modal-title" id="myModalLabel">Crear Album</h4>
                   </div>
                   <div class="modal-body">
                         
-                    {{ Form::open(array('url' => '/crearalbum', 'files' => true)) }} 
+                    {{ Form::open(array('url' => '/createalbum', 'files' => true)) }} 
 
                         <h4 class='mtop20'>Nombre del album</h4>
-                        <input class='form-control' type="text" name="Album" value="" placeholder="Ej: Hervás">
+                        <input class='form-control' type="text" name="Name" value="" placeholder="Ej: Hervás">
                         <br>
 
                         <input type="submit" class='btn btn-primary mtop20' value="Crear Album">

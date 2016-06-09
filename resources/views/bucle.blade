@@ -1,0 +1,74 @@
+<div class="album-admin">
+
+      @for ($i = 0 ; $i < count( $AlbumsWithPictures ); $i++)
+        <p> {{ $AlbumsWithPictures[$i][0]->Name }}</p>
+        @for ($j = 0; $j < count( $AlbumsWithPictures[$i] ); $j++)
+      
+        
+        <div class="fotos">
+          
+          
+           
+              <li>
+                
+                <img src="/img/carousel-1.jpg" alt=""><br>
+                
+                <a class='btn btn-danger' href="#" data-toggle="tooltip" data-placement="top" title="Borrar: no hay marcha atrás"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+              </li>
+
+          
+          
+        </div>
+        @endfor
+      
+      @endfor
+    </div>
+
+    <div class="album-admin">
+      <p>Hervás</p>
+      <div class="fotos">
+          <li>
+            <img src="/img/carousel-1.jpg" alt=""><br>
+            
+            <a class='btn btn-danger' href="#" data-toggle="tooltip" data-placement="top" title="Borrar: no hay marcha atrás"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+          </li>
+          <li>
+            <img src="/img/carousel-2.jpg" alt=""><br>
+            
+            <a class='btn btn-danger' href="#" title=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+          </li>
+          <li>
+            <img src="/img/carousel-1.jpg" alt=""><br>
+            
+            <a class='btn btn-danger' href="#" title=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+          </li>
+          <li>
+            <img src="/img/carousel-2.jpg" alt=""><br>
+            
+            <a class='btn btn-danger' href="#" title=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+          </li>
+      </div>
+    </div>
+
+    <div class="fotos">
+        <li>
+          <img src="/img/carousel-1.jpg" alt=""><br>
+          <i class="fa fa-folder-open-o" aria-hidden="true"></i> Hervás
+          <a class='btn btn-danger' href="#" data-toggle="tooltip" data-placement="top" title="Borrar: no hay marcha atrás"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        </li>
+        <li>
+          <img src="/img/carousel-2.jpg" alt=""><br>
+          <i class="fa fa-folder-open-o" aria-hidden="true"></i> Hervás
+          <a class='btn btn-danger' href="#" title=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        </li>
+        <li>
+          <img src="/img/carousel-1.jpg" alt=""><br>
+          <i class="fa fa-folder-open-o" aria-hidden="true"></i> Hervás
+          <a class='btn btn-danger' href="#" title=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        </li>
+        <li>
+          <img src="/img/carousel-2.jpg" alt=""><br>
+          <i class="fa fa-folder-open-o" aria-hidden="true"></i> Hervás
+          <a class='btn btn-danger' href="#" title=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        </li>
+    </div>

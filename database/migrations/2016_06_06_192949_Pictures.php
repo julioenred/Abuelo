@@ -18,8 +18,12 @@ class Pictures extends Migration
             $tabla->string('Title', 100);
             $tabla->string('Description', 300);
             $tabla->string('Url', 300);
-
+            $tabla->integer('Id_Album')->unsigned();
             $tabla->timestamps();
+
+            $tabla->foreign('Id_Album')->references('id')->on('Albums');
+
+            
         });
     }
 

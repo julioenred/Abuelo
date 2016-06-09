@@ -1,6 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
+use Input;
+
+use App\Albums;
+
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -25,6 +30,94 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function ViewPicturesAdmin()
+    {
+        return $this->RenderView( 'PicturesAdmin' );
+    }
+
+    public function ViewAlbumsAdmin()
+    {
+        return $this->RenderView( 'AlbumsAdmin' );
+    }
+
+    public function RenderView( $View )
+    {
+        return view( $View , [
+                                'Albums'             => $this->GetAlbums(),
+                                'AlbumsWithPictures' => $this->GetAlbumsWithPictures(),
+                                'PicturesWithAlbums' => $this->GetPicturesWithAlbums(),
+                             ]);
+    }
+
+    public function GetAlbums()
+    {
+        $Albums = DB::table('Albums')->get();
+
+        // dd( $Albums );
+        return $Albums;
+    }
+
+    public function GetAlbumsByIdWithPictures( $Id )
+    {
+        $Albums = DB::table('Pictures')
+                    ->join('Albums', 'Pictures.Id_Album', '=', 'Albums.id')
+                    ->where('Albums.id' , '=' , $Id )
+                    ->get();
+
+        // dd($Albums);
+
+        return $Albums;
+    }
+
+    public function GetAlbumsWithPictures()
+    {
+        $AlbumsWhitPictures = [];
+        $Albums = $this->GetAlbums();
+
+        // dd( $Albums );
+
+        foreach ($Albums as $key => $value) 
+        {
+            $AlbumsWhitPictures[ $key ] = $this->GetAlbumsByIdWithPictures( $Albums[ $key ]->id );
+        }
+
+        //dd( $AlbumsWhitPictures );
+
+        return $AlbumsWhitPictures;
+    }
+
+    public function GetPicturesWithAlbums()
+    {
+        $Pictures = DB::table('Pictures')
+                    ->join('Albums', 'Pictures.Id_Album', '=', 'Albums.id')
+                    ->get();
+
+        // dd($Pictures);
+
+        return $Pictures;
+    }
+
+    public function CreateAlbum( Request $Request )
+    {
+        $Name  = ucfirst( strtolower( $Request->input( 'Name' ) ) );
+        $Exist = DB::table( 'Albums' )->select( 'Name' )->where( 'Name' , '=' , $Name )->first();
+
+        // dd( $Name );
+
+        if ( empty( $Exist ) ) 
+        {
+            if ( $Name != '' and $Name != ' ' ) 
+            {
+                Albums::create([
+                                  'Name' => $Name
+                               ]);
+            }
+        }
+
+        
+        return redirect( '/albumes' );
     }
 
     public function resizeImagen($ruta, $nombre, $alto, $ancho, $nombreN, $extension)
@@ -102,97 +195,93 @@ class HomeController extends Controller
         imagejpeg( $tmp, $ruta . $nombreN, $calidad ); #Guardar imagen nueva y bajar calidad
         unlink( $ruta . $nombre ); #Eliminar imagen grande
 
-
-
-
-
     }
 
     public function subirFoto()
-      {
-            $directory = 'public/img/' . Auth::user()->id . '-' . Auth::user()->Usuario.'/';
-            $path = base_path( $directory );
+    {
+          $directory = 'public/img/' . Auth::user()->id . '-' . Auth::user()->Usuario.'/';
+          $path = base_path( $directory );
 
-            // $this->pintar($path);
+          // $this->pintar($path);
 
-            if ( ! file_exists ( $path ) ) 
-            {
-                 
-                  mkdir( $path );
-                  
-            }
-            else
-            {
-                  if ( ! is_dir( $path ) ) 
-                  {
-                        mkdir( $path );
-                  }
-            }
+          if ( ! file_exists ( $path ) ) 
+          {
+               
+                mkdir( $path );
+                
+          }
+          else
+          {
+                if ( ! is_dir( $path ) ) 
+                {
+                      mkdir( $path );
+                }
+          }
 
-            $file = Input::file('file');
-            $mime = explode("/", $file->getMimeType() );
-            //var_dump($file);
+          $file = Input::file('file');
+          $mime = explode("/", $file->getMimeType() );
+          //var_dump($file);
 
-            if ( $mime[1] != 'jpg' and $mime[1] != 'JPG' and $mime[1] != 'jpeg' and $mime[1] != 'JPEG' and $mime[1] != 'png' and $mime[1] != 'PNG' and $mime[1] != 'gif' and $mime[1] != 'GIF' ) 
-            {
-              return View::make('errorMsg', array(
+          if ( $mime[1] != 'jpg' and $mime[1] != 'JPG' and $mime[1] != 'jpeg' and $mime[1] != 'JPEG' and $mime[1] != 'png' and $mime[1] != 'PNG' and $mime[1] != 'gif' and $mime[1] != 'GIF' ) 
+          {
+            return View::make('errorMsg', array(
 
-                          'Idioma'            => $this->getLanguage(),
-                          'User'              => $this->verUsuario( Auth::user()->id),
-                          'display'           => ['breaks' => 'active', 'contactos' => '', 'fotos' => ''],  
-                          'Usuario'           => Auth::user()->Usuario,
-                          'Foto_Perfil'       => Auth::user()->Url_Foto_Perfil,
-                          'SobreTi'           => Auth::user()->Sobre_Ti,
-                          'Grupos'            => $this->grupos(),
-                          'Comentarios'       => $this->verComentariosMuro(),
-                          'Consejos'          => $this->verConsejosSeguidores(),
-                          'BREAKS'            => 'BREAKS',
-                          'linkBreaks'        => '/inicio',  
-                          'nConsejos'         => $this->nMisConsejos(),
-                          'nContactos'        => $this->nContactos(),
-                          'nFotos'            => $this->nFotos( Auth::user()->id ),
-                          'IDF'               => $this->IDF( Auth::user()->id ),
-                          'Usuarios'          => $this->getSuggestedUsersFor( Auth::user()->id ),
-                          'TopSAS'            => $this->getTopSASUsers(),
-                          'nNotificacionesNL' => $this->nNotificacionesNL(),
-                          'nMensajesNL'       => $this->nMensajesNL(),
-                          'grafico'           => $this->grafico( Auth::user()->id ),
-                          'seUnioHace'        => $this->seUnioHace( Auth::user()->id ),
-                          'Actividades'       => $this->getActividadesRecientes(),
-                          'Vista'             => 'success',
-                          'Mensaje'           => 'El archivo que quieres adjuntar no está permitido. Debe ser un archivo del siguiente tipo: jpg, jpeg, png o gif. Puedes volver a intentarlo ;)',  
-                      
-                                         
-                                         )
-                         );
-            }
-            else
-            {
+                        'Idioma'            => $this->getLanguage(),
+                        'User'              => $this->verUsuario( Auth::user()->id),
+                        'display'           => ['breaks' => 'active', 'contactos' => '', 'fotos' => ''],  
+                        'Usuario'           => Auth::user()->Usuario,
+                        'Foto_Perfil'       => Auth::user()->Url_Foto_Perfil,
+                        'SobreTi'           => Auth::user()->Sobre_Ti,
+                        'Grupos'            => $this->grupos(),
+                        'Comentarios'       => $this->verComentariosMuro(),
+                        'Consejos'          => $this->verConsejosSeguidores(),
+                        'BREAKS'            => 'BREAKS',
+                        'linkBreaks'        => '/inicio',  
+                        'nConsejos'         => $this->nMisConsejos(),
+                        'nContactos'        => $this->nContactos(),
+                        'nFotos'            => $this->nFotos( Auth::user()->id ),
+                        'IDF'               => $this->IDF( Auth::user()->id ),
+                        'Usuarios'          => $this->getSuggestedUsersFor( Auth::user()->id ),
+                        'TopSAS'            => $this->getTopSASUsers(),
+                        'nNotificacionesNL' => $this->nNotificacionesNL(),
+                        'nMensajesNL'       => $this->nMensajesNL(),
+                        'grafico'           => $this->grafico( Auth::user()->id ),
+                        'seUnioHace'        => $this->seUnioHace( Auth::user()->id ),
+                        'Actividades'       => $this->getActividadesRecientes(),
+                        'Vista'             => 'success',
+                        'Mensaje'           => 'El archivo que quieres adjuntar no está permitido. Debe ser un archivo del siguiente tipo: jpg, jpeg, png o gif. Puedes volver a intentarlo ;)',  
+                    
+                                       
+                                       )
+                       );
+          }
+          else
+          {
 
-                  $nFotos = DB::table('Fotos')->first();
-                  $aux = $nFotos->Numero_Fotos;
-                  $aux++;
-                  // $this->pintar( $aux );
-                  DB::table('Fotos')->where('id', $nFotos->id)->update( ['Numero_Fotos' => $aux] ); 
+                $nFotos = DB::table('Fotos')->first();
+                $aux = $nFotos->Numero_Fotos;
+                $aux++;
+                // $this->pintar( $aux );
+                DB::table('Fotos')->where('id', $nFotos->id)->update( ['Numero_Fotos' => $aux] ); 
 
-                  // $this->pintar($filename);
-                  $temporal = 'temporal-album-' . Auth::user()->id . '-' . $file->getClientOriginalName();
-                  $temporal = str_replace(" ", "-", $temporal);
+                // $this->pintar($filename);
+                $temporal = 'temporal-album-' . Auth::user()->id . '-' . $file->getClientOriginalName();
+                $temporal = str_replace(" ", "-", $temporal);
 
-                  $file->move($path, $temporal);
+                $file->move($path, $temporal);
 
-                  $fotoAlbum = $aux . '.' . $mime[1];
-                  $fotoAlbum = str_replace(" ", "-", $fotoAlbum);
+                $fotoAlbum = $aux . '.' . $mime[1];
+                $fotoAlbum = str_replace(" ", "-", $fotoAlbum);
 
-                  $this->resizeImagen( $path, $temporal, 425, 425,  $fotoAlbum, $mime[1]);
+                $this->resizeImagen( $path, $temporal, 425, 425,  $fotoAlbum, $mime[1]);
 
-                  $url = '/fotos/' . Auth::user()->id;
+                $url = '/fotos/' . Auth::user()->id;
 
-                  return Redirect::to( $url );
-            }
-      }
+                return Redirect::to( $url );
+          }
+    }
 
-    public function uploadImagen()
+    public function uploadImage()
     {
         
         $Album = Input::get('Album');

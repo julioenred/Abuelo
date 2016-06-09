@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
 class Pictures extends Model
 {
@@ -10,5 +10,10 @@ class Pictures extends Model
     protected $fillable = [
         'Title', 'Description', 'Url',
     ];
+
+    public function Albums()
+	{
+		return $this->belongsTo('Albums');
+	}
 
 }

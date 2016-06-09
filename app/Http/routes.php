@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/prueba', 'HomeController@GetAlbumsWithPictures');
+
 Route::get('/', function () {
     return view('Index');
 });
@@ -31,13 +33,11 @@ Route::any('crop', function () {
 
 });
 
-Route::any('fotos', function () {
-    return view('FotosAdmin');
-});
+Route::any('/pictures', 'HomeController@ViewPicturesAdmin');
 
-Route::any('albumes', function () {
-    return view('AlbumesAdmin');
-});
+Route::any('/albums', 'HomeController@ViewAlbumsAdmin');
+
+Route::any('/createalbum', 'HomeController@CreateAlbum');
 
 Route::auth();
 
