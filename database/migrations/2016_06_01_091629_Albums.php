@@ -16,7 +16,8 @@ class Albums extends Migration
         {
             $tabla->increments('id');
             $tabla->string('Name', 100);
-            $tabla->string('Activo', 300)->default('1');
+            $tabla->string('Activo', 1)->default('1');
+            $tabla->string('Type', 1);
 
             $tabla->timestamps();
         });

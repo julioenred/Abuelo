@@ -17,7 +17,9 @@ class Pictures extends Migration
             $tabla->increments('id');
             $tabla->string('Title', 100);
             $tabla->string('Description', 300);
-            $tabla->string('Url', 300);
+            $tabla->string('Url', 500);
+            $tabla->string('Url_Croped', 500);
+            $tabla->string('Mime', 5);
             $tabla->integer('Id_Album')->unsigned();
             $tabla->timestamps();
 

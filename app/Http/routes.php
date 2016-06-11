@@ -12,6 +12,7 @@
 */
 
 Route::get('/prueba', 'HomeController@GetAlbumsWithPictures');
+Route::get('/test', 'HomeController@Test');
 
 Route::get('/', function () {
     return view('Index');
@@ -29,9 +30,7 @@ Route::get('jcrop', function () {
     return view('Jcrop');
 });
 
-Route::any('crop', function () {
-
-});
+Route::any('crop', 'HomeController@CropPicture');
 
 Route::any('/pictures', 'HomeController@ViewPicturesAdmin');
 
