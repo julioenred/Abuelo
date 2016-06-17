@@ -11,20 +11,21 @@
 |
 */
 
-Route::get('/prueba', 'HomeController@GetAlbumsWithPictures');
-Route::get('/test', 'HomeController@Test');
+Route::any('/prueba', 'HomeController@GetAlbumsWithPictures');
+Route::any('/test', 'HomeController@Test');
 
-Route::get('/', 'PublicController@ViewIndex');
+Route::any('/', 'PublicController@ViewIndex');
 
-Route::get('norbertosevilla', 'PublicController@ViewNorbertoSevilla');
+Route::any('/norbertosevilla', 'PublicController@ViewNorbertoSevilla');
+Route::any('/album/{Id_Album}', 'PublicController@ViewAlbum');
 
-Route::get('sobrenorberto', 'PublicController@ViewBiografia');
+Route::any('/sobrenorberto', 'PublicController@ViewBiografia');
 
 Route::get('jcrop', function () {
     return view('Jcrop');
 });
 
-Route::any('crop', 'HomeController@CropPicture');
+Route::any('/crop', 'HomeController@CropPicture');
 
 Route::any('/pictures', 'HomeController@ViewPicturesAdmin');
 

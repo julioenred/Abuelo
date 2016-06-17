@@ -191,6 +191,7 @@ body
 .pictures li img
 {
 	border-radius: 4px;
+	cursor: pointer;
 	margin-bottom: 2px;
 	width: 135px;
 }

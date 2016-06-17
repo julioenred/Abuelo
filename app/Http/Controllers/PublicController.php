@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Request;
 class PublicController extends Controller
 {
     
-    
+    protected $Album;
+
     public function ViewIndex()
     {
         return $this->RenderView( 'Index' );
@@ -30,6 +31,13 @@ class PublicController extends Controller
         return $this->RenderView( 'Biografia' );
     }
 
+    public function ViewAlbum( $Id_Album )
+    {
+        $this->Album = $this->GetAlbumsByIdWithPictures( $Id_Album );
+
+        return $this->RenderView( 'Album' );
+    }
+
     public function RenderView( $View )
     {
    
@@ -37,6 +45,7 @@ class PublicController extends Controller
                                 'Albums'             => $this->GetAlbums(),
                                 'AlbumsWithPictures' => $this->GetAlbumsWithPictures(),
                                 'PicturesWithAlbums' => $this->GetPicturesWithAlbums(),
+                                'Album'              => $this->Album,
                              ]);
     }
 
@@ -47,6 +56,7 @@ class PublicController extends Controller
         // dd( $Albums );
         return $Albums;
     }
+
 
     public function GetAlbumsByIdWithPictures( $Id )
     {
