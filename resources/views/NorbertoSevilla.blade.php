@@ -84,32 +84,64 @@
 @endsection
 
 @section('sidebar')
-
+  @for ($i = 0 ; $i < count( $AlbumsWithPictures ); $i++)
     <div class="album">
-        <div class="album-sheet">
-            <div class="album-sheet-title">
-                <span>HERVÁS</span><span>·</span><a href="#" title="">Ver Todos</a>
-            </div>
-            <div class="pictures">
-                <li><img src="/img/carousel-1.jpg" alt="" data-toggle="modal" data-target="#modal"></li>
-                <li><img src="/img/carousel-2.jpg" alt=""></li>
-                <li><img src="/img/carousel-1.jpg" alt=""></li>
-                <li><img src="/img/carousel-2.jpg" alt=""></li>
-            </div>
-        </div>
+
+      @if ( $AlbumsWithPictures[$i][0]->Type !== 'Album' )
 
         <div class="album-sheet">
             <div class="album-sheet-title">
-                <span>HERVÁS</span><span>·</span><a href="#" title="">Ver Todos</a>
+                <span>{{ $AlbumsWithPictures[$i][0]->Name }}</span><span>·</span><a href="#" title="">Ver Todos</a>
             </div>
             <div class="pictures">
-                <li><img src="/img/carousel-1.jpg" alt=""></li>
-                <li><img src="/img/carousel-2.jpg" alt=""></li>
-                <li><img src="/img/carousel-1.jpg" alt=""></li>
-                <li><img src="/img/carousel-2.jpg" alt=""></li>
+              <?php 
+                if ( count( $AlbumsWithPictures[$i] ) > 4 ) 
+                {
+                  $Count = 4;
+                }
+                else
+                {
+                  $Count = count( $AlbumsWithPictures[$i] );
+                }
+              ?>
+              @for ($j = 0; $j < $Count ; $j++)
+                <li><img src="{{ $AlbumsWithPictures[$i][$j]->Url_Croped }}" alt="" data-toggle="modal" data-target="#modal-{{ $AlbumsWithPictures[$i][$j]->Id_Picture }}"></li>
+
+                <!-- Large modal -->
+
+                <div id='modal-{{ $AlbumsWithPictures[$i][$j]->Id_Picture }}' class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                      <div class="modal-img">
+                        <img class='img-responsive' src="{{ $AlbumsWithPictures[$i][$j]->Url }}" alt="">
+                      </div>
+                      
+                      <div class="modal-text">
+                          <div class="modal-title">
+                            {{ $AlbumsWithPictures[$i][$j]->Title }}
+                          </div>
+                          <div class="modal-description">
+                            {{ $AlbumsWithPictures[$i][$j]->Description }}
+                          </div>
+                      </div>
+                      
+                    </div>
+                    
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                  </div>
+                </div>
+                
+              @endfor
             </div>
         </div>
+      @endif
     </div>
+    @endfor
+
+     
 @endsection
 
 @section('modals')

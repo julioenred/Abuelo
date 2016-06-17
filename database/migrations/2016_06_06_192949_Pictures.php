@@ -14,7 +14,7 @@ class Pictures extends Migration
     {
         Schema::create('Pictures', function(Blueprint $tabla) 
         {
-            $tabla->increments('id');
+            $tabla->increments('Id_Picture');
             $tabla->string('Title', 100);
             $tabla->string('Description', 300);
             $tabla->string('Url', 500);
@@ -23,7 +23,7 @@ class Pictures extends Migration
             $tabla->integer('Id_Album')->unsigned();
             $tabla->timestamps();
 
-            $tabla->foreign('Id_Album')->references('id')->on('Albums');
+            $tabla->foreign('Id_Album')->references('Id_Album')->on('Albums');
 
             
         });

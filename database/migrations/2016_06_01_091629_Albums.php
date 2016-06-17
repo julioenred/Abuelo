@@ -14,7 +14,7 @@ class Albums extends Migration
     {
         Schema::create('Albums', function(Blueprint $tabla) 
         {
-            $tabla->increments('id');
+            $tabla->increments('Id_Album');
             $tabla->string('Name', 100);
             $tabla->string('Activo', 1)->default('1');
             $tabla->string('Type', 1);

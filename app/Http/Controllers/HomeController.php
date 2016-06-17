@@ -85,14 +85,14 @@ class HomeController extends Controller
     public function GetAlbumsByIdWithPictures( $Id )
     {
         $Albums = DB::table('Pictures')
-                    ->join('Albums', 'Pictures.Id_Album', '=', 'Albums.id')
-                    ->where('Albums.id' , '=' , $Id )
+                    ->join('Albums', 'Pictures.Id_Album', '=', 'Albums.Id_Album')
+                    ->where('Albums.Id_Album' , '=' , $Id )
                     ->get();
         
 
         if ( empty( $Albums ) ) 
         {
-            $Albums = DB::table('Albums')->where('Albums.id' , '=' , $Id )
+            $Albums = DB::table('Albums')->where('Albums.Id_Album' , '=' , $Id )
                     ->get();
 
                     //dd($Albums);
@@ -114,7 +114,7 @@ class HomeController extends Controller
 
         foreach ($Albums as $key => $value) 
         {
-            $AlbumsWhitPictures[ $key ] = $this->GetAlbumsByIdWithPictures( $Albums[ $key ]->id );
+            $AlbumsWhitPictures[ $key ] = $this->GetAlbumsByIdWithPictures( $Albums[ $key ]->Id_Album );
         }
 
         //dd( $AlbumsWhitPictures );
@@ -125,7 +125,7 @@ class HomeController extends Controller
     public function GetPicturesWithAlbums()
     {
         $Pictures = DB::table('Pictures')
-                    ->join('Albums', 'Pictures.Id_Album', '=', 'Albums.id')
+                    ->join('Albums', 'Pictures.Id_Album', '=', 'Albums.Id_Album')
                     ->get();
 
         // dd($Pictures);
@@ -170,7 +170,7 @@ class HomeController extends Controller
         $Directory = 'public/img/' . $Album . '/';
         $Path = base_path( $Directory );
         $File = Request::file( 'File' );
-        //dd($File->getClientOriginalExtension());
+        //dd(getimagesize($File->getPathname()));
         $Mime = $File->getClientOriginalExtension();
         //dd($Mime);
 
@@ -197,8 +197,29 @@ class HomeController extends Controller
                   }
             }
 
+            //dd($File->getClientOriginalExtension());
+            $temporal = 'temporal-' . time() . '-' . $File->getClientOriginalName();
+            $temporal = str_replace(" ", "-", $temporal);
+            $Size = getimagesize($File->getPathname());
+
             $Img = time() . '-' . $File->getClientOriginalName();
-            $File->move($Path, $Img);
+            $Img = str_replace(" ", "-", $Img);
+
+            $File->move($Path, $temporal);
+
+            
+
+            if ( $this->getPosition( $Size ) === 'horizontal') 
+            {
+                $Proportion = $this->resizeMaxWidth( $Size , 600 );
+            }
+            else
+            {
+                $Proportion = $this->resizeMaxHeight( $Size , 600 );
+            }
+
+            $this->resizeImagen( $Size, $Path, $temporal, $Proportion['MaxWidth'], $Proportion['MaxHeight'],  $Img);
+
             $Url = '/img/' . $Album . '/' . $Img;
 
             Pictures::create([
@@ -212,10 +233,103 @@ class HomeController extends Controller
             //dd($Url);
             return $this->ViewCropPictureByImg( $Url );
         }
+  
+    }
+
+    public function getPosition( $Picture )
+    {
+        $Width  = $Picture[0];
+        $Height = $Picture[1];
+
+        if ( $Width > $Height or $Width === $Height ) 
+        {
+            return 'horizontal';
+        }
+        else
+        {
+            return 'vertical';
+        }
+    }
+
+    public function resizeMaxWidth( $Picture , $MaxWidth )
+    {
+        $Width  = $Picture[0];
+        $Height = $Picture[1];
+
+        $Prop = $MaxWidth * 100 / $Width;
+
+        $MaxHeight = $Prop / 100 * $Height;
+
+        $Proportion['MaxWidth']  = $MaxWidth;
+        $Proportion['MaxHeight'] = $MaxHeight;
+
+        return $Proportion;
+    }
+
+    public function resizeMaxHeight( $Picture , $MaxHeight )
+    {
+        $Width  = $Picture[0];
+        $Height = $Picture[1];
+
+        $Prop = $MaxHeight * 100 / $Height;
+
+        $MaxWidth = $Prop / 100 * $Width;
+
+        $Proportion['MaxWidth']  = $MaxWidth;
+        $Proportion['MaxHeight'] = $MaxHeight;
+
+        return $Proportion;
+    }
+
+    public function resizeImagen( $Picture, $ruta, $nombre, $ancho, $alto, $nombreN )
+    {
+
+        # $Picture: dimensiones originales de la foto
+        # $ruta: Ruta de la imagen (Ej: vergfer\ferfe\fwef\)
+        # $nombre: Nombre original de la imagen
+        # $alto: Alto deseado
+        # $alto: Ancho deseado
+        # $nombreN: Nombre de la nueva imagen reducida
+        # $extension: Extension de la imagen
+
+        $WidthOriginal  = $Picture[0];
+        $HeightOriginal = $Picture[1];
+
+        $rutaImagenOriginal = $ruta . $nombre;
+        $extension = explode('/' , mime_content_type( $rutaImagenOriginal ) );
+
+        //dd($extension[1]);
+
+        if( $extension[1] == 'GIF' || $extension[1] == 'gif' )
+        {
+            $img_original = imagecreatefromgif( $rutaImagenOriginal );
+        }
+
+        if($extension[1] == 'jpg' || $extension[1] == 'JPG' || $extension[1] == 'jpeg' || $extension[1] == 'JPEG')
+        {
+            $img_original = imagecreatefromjpeg( $rutaImagenOriginal );
+        }
+
+        if($extension[1] == 'png' || $extension[1] == 'PNG')
+        {
+            $img_original = imagecreatefrompng( $rutaImagenOriginal );
+        }
+
+        $tmp = imagecreatetruecolor( $ancho, $alto );
+        imagecopyresampled( $tmp, $img_original, 0, 0, 0, 0, $ancho, $alto, $WidthOriginal, $HeightOriginal );
+        imagedestroy( $img_original );
+        $calidad = 100;
+
+       
+        imagejpeg( $tmp, $ruta . $nombreN, $calidad ); #Guardar imagen nueva y bajar calidad
+        
 
         
-        
+        unlink( $ruta . $nombre ); #Eliminar imagen grande
+
     }
+
+    
 
     public function CropPicture()
     {
@@ -224,28 +338,17 @@ class HomeController extends Controller
            $Picture = json_decode( Request::input('Picture') );
            //dd($Picture->Mime);
            $UrlAux = explode('/', trim($Picture->Url) );
-           //dd($UrlAux);
+           //dd($Picture);
            $targ_w = 150;
            $targ_h = 84.75; 
            $jpeg_quality = 70;
-           $src = public_path( $Picture->Url );
+           $src = public_path( substr( $Picture->Url , 1 ) );
            $dst_r = ImageCreateTrueColor($targ_w, $targ_h);
-           //dd($this->UploadPictureExt);
+           //dd($src);
 
-           if( $Picture->Mime == 'GIF' || $Picture->Mime == 'gif' )
-            {
-                $img_r = imagecreatefromgif( $src );
-            }
-
-            if($Picture->Mime == 'jpg' || $Picture->Mime == 'JPG' || $Picture->Mime == 'jpeg' || $Picture->Mime == 'JPEG')
-            {
-                $img_r = imagecreatefromjpeg( $src );
-            }
-
-            if($Picture->Mime == 'png' || $Picture->Mime == 'PNG')
-            {
-                $img_r = imagecreatefrompng( $src );
-            }
+           
+            $img_r = imagecreatefromjpeg( $src );
+            
 
            imagecopyresampled($dst_r, $img_r, 0, 0, $_POST['x'], $_POST['y'], $targ_w, $targ_h, $_POST['w'], $_POST['h']);
            //header('Content-type: image/jpeg');
@@ -256,7 +359,7 @@ class HomeController extends Controller
 
            imagejpeg($dst_r,  $Url_Local_Croped , $jpeg_quality);
 
-           Pictures::where('id', $Picture->id )->update( [ 'Url_Croped' => $Url_Http_Croped ] );
+           Pictures::where('Id_Picture', $Picture->Id_Picture )->update( [ 'Url_Croped' => $Url_Http_Croped ] );
 
            return $this->ViewAlbumsAdmin();
            

@@ -93,7 +93,7 @@
 		width: 600px;
 	}
 
-	.album img
+	.pictures li img
 	{
 		border-radius: 4px;
 		margin-bottom: 2px;
@@ -307,7 +307,7 @@
 		width: 100%;
 	}
 
-	.album img
+	.pictures li img
 	{
 		border-radius: 4px;
 		margin-bottom: 2px;

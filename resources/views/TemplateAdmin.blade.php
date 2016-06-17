@@ -71,7 +71,7 @@
 
                         <select class="form-control" name='Album'>
                             @foreach ($Albums as $element)
-                                <option value='{{ $element->id }}'>{{ $element->Name }}</option>
+                                <option value='{{ $element->Id_Album }}'>{{ $element->Name }}</option>
                             @endforeach
                         </select> 
 

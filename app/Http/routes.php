@@ -14,17 +14,11 @@
 Route::get('/prueba', 'HomeController@GetAlbumsWithPictures');
 Route::get('/test', 'HomeController@Test');
 
-Route::get('/', function () {
-    return view('Index');
-});
+Route::get('/', 'PublicController@ViewIndex');
 
-Route::get('norbertosevilla', function () {
-    return view('NorbertoSevilla');
-});
+Route::get('norbertosevilla', 'PublicController@ViewNorbertoSevilla');
 
-Route::get('sobrenorberto', function () {
-    return view('Biografia');
-});
+Route::get('sobrenorberto', 'PublicController@ViewBiografia');
 
 Route::get('jcrop', function () {
     return view('Jcrop');
